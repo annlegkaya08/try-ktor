@@ -16,6 +16,6 @@ data class CalculationResponse(
     val totalContributions: Double,
     val totalEarnings: Double,
     val averageAnnualReturn: Double,
-    val inflationAdjustedValue: Double? = null,
+    val inflationAdjustedValue: Double?,
     val yearlyBreakdown: List<YearlyBreakdown>
 )
