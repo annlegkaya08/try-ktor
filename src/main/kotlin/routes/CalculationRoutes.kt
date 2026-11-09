@@ -7,7 +7,6 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import java.text.NumberFormat
 import java.util.*
 
 fun Route.calculationRoutes() {
@@ -25,7 +24,6 @@ fun Route.calculationRoutes() {
 
         val result = service.calculate(request)
         call.respond(HttpStatusCode.OK, result)
-
       } catch (e: IllegalArgumentException) {
         throw e
       } catch (e: Exception) {
@@ -42,15 +40,16 @@ fun Route.calculationRoutes() {
         val years = parseYears(call.request.queryParameters["years"] ?: "0")
         val inflation = parseDoubleOrNull(call.request.queryParameters["inflation"])
 
-        val request = CalculationRequest(
-          initialAmount = initial,
-          monthlyContribution = monthly,
-          annualReturn = rate,
-          inflation = inflation,
-          years = years
-        )
+        val request =
+            CalculationRequest(
+                initialAmount = initial,
+                monthlyContribution = monthly,
+                annualReturn = rate,
+                inflation = inflation,
+                years = years,
+            )
 
-        // Валидация
+        // Validation
         val errors = request.validate()
         if (errors.isNotEmpty()) {
           throw IllegalArgumentException(errors.joinToString(", "))
@@ -58,7 +57,6 @@ fun Route.calculationRoutes() {
 
         val result = service.calculate(request)
         call.respond(HttpStatusCode.OK, result)
-
       } catch (e: NumberFormatException) {
         throw IllegalArgumentException("Invalid number format: ${e.message}")
       } catch (e: IllegalArgumentException) {
