@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Сложный процент</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Hanken+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="app">
+      <header class="head">
+        <div>
+          <h1>Сложный процент</h1>
+          <p>Посмотрите, как растёт капитал при регулярных пополнениях.</p>
+        </div>
+        <label class="cur">
+          Валюта
+          <select id="currency">
+            <option value="₽">₽</option>
+            <option value="$">$</option>
+            <option value="€">€</option>
+          </select>
+        </label>
+      </header>
+
+      <div class="layout">
+        <form id="controls" class="controls" autocomplete="off" onsubmit="return false"></form>
+
+        <section id="result" class="result" aria-live="polite">
+          <div id="error" class="error" role="alert" hidden></div>
+
+          <div class="hero">
+            <p class="hero-label" id="hero-label">Через 20 лет у вас будет</p>
+            <p class="hero-number" id="fv">—</p>
+            <p class="hero-sub" id="real"></p>
+          </div>
+
+          <div class="split">
+            <div class="split-bar" aria-hidden="true"><span id="split-base"></span></div>
+            <div class="split-legend">
+              <span><i class="sw sw-base"></i>Внесено <strong id="s-contrib">—</strong></span>
+              <span><i class="sw sw-grow"></i>Доход <strong id="s-earn">—</strong></span>
+            </div>
+          </div>
+
+          <div class="readout" id="readout"></div>
+          <div class="chart" id="chart"></div>
+
+          <p class="chart-legend">
+            <span><i class="sw sw-base"></i>Внесено</span>
+            <span><i class="sw sw-grow"></i>Доход</span>
+            <span id="lg-real" hidden><i class="sw sw-real"></i>С учётом инфляции</span>
+          </p>
+
+          <details class="table">
+            <summary>Таблица по годам</summary>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Год</th><th>Всего</th><th>Внесено</th><th>Доход</th></tr>
+                </thead>
+                <tbody id="rows"></tbody>
+              </table>
+            </div>
+          </details>
+        </section>
+      </div>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
